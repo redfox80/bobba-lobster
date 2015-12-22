@@ -1,0 +1,81 @@
+/*stylesheet*/
+
+body{
+	font-family: sans-serif, arial, helvetica;
+	margin: 0px !important;
+	background-color: #ccc;
+}
+
+.header{
+	position: relative;
+	margin: 0px;
+	width: 100%;
+	height: 40px;
+	background-color: #e42;
+	text-align: center;	
+}
+
+.buttonheader {
+	position: relative;
+	width: 100%;
+	height: 50px;
+	background-color: #e42;
+	border-top: 2px solid #000;
+	line-height: 2.2;
+}
+
+.buttonheader .button1{
+	width: 80px;
+	height: 35px;
+	text-align: center;
+	border-radius: 5px;
+	background-color: #b40;
+	border: 1px solid #000;
+	margin: 2px;
+	margin-top: 5px;
+	display: inline-block;
+}
+.buttonheader a {
+	text-decoration: none;
+	color: #fff;
+}
+
+.buttonheader a div:hover {
+	cursor: pointer;
+	text-decoration: none;
+	color: #bbb;
+}
+
+.buttonheader a:visited {
+	text-decoration: none;
+	color: #fff;
+}
+
+.siteholder{
+	position: relative;
+	width: 90%;
+	left: 50%;
+	margin-left: -45%;
+	margin-top: 20px;
+	border: 1px solid black;
+	height: 600px;
+}
+
+.normalElement{
+	display: none;
+}
+
+#main{
+	display: inherit;
+}
+
+.login{
+	position: relative;
+	width: 400px;
+	left: 50%;
+	margin-left: -200px;
+	text-align: center;
+	border: 1px solid #000;	
+	padding: 15px;
+	border-radius: 10px;
+}
