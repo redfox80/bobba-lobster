@@ -57,6 +57,8 @@
 					<button onclick="login();">Login</button>
 					<button>Register</button>
 					<button onclick="clearInputArea();">clear</button>
+					<br><br>
+					<p id="loginNotification"></p>
 
 				</div>
 

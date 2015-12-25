@@ -11,9 +11,7 @@ function displayPrimary(element) {
 	document.getElementById(elementArray[element]).style.display = "inherit";
 
 	if(elementArray[element] == "login"){
-		document.getElementById("username").value = "";
-		document.getElementById("password").value = "";
-		document.getElementById("username").focus();
+		clearInputArea();
 	}
 }
 
@@ -24,6 +22,7 @@ function displayPrimary(element) {
 function clearInputArea(){
 	document.getElementById("username").value = "";
 	document.getElementById("password").value = "";
+	document.getElementById("loginNotification").innerHTML = "";
 
 	document.getElementById("username").focus();
 }

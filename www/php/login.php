@@ -1,7 +1,7 @@
 <?php
-
-	$username = $_GET("username");
-	$password = md5($_GET("password"));
+	
+	$username = $_GET["username"];
+	$password = hash("sha512", $_GET["password"]);
 	$loginRES = null;
 
 	if ($username != "" && $password != ""){
@@ -14,9 +14,9 @@
 
 		$response = mysqli_fetch_array($qRequest);
 
-		if(response['username'] == $username && response['password'] == $password){
+		if($response['username'] == $username && $response['password'] == $password){
 			$loginRES = "VALID";
-		} else if( response['username'] != $username || response['password'] != $password){
+		} else if( $response['username'] != $username || $response['password'] != $password){
 			$loginRES = "INVALID";
 		} else {
 			$loginRES = "ERROR";

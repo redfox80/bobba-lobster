@@ -19,6 +19,7 @@ console.log(xmlhttp);
 
 			xmlhttp.open("GET", "/php/login.php?username="+usernameI+"&password="+passwordI , true);
 			xmlhttp.send();
+			var timeOut = 0;
 
 			xmlhttp.onreadystatechange = function () {
 
@@ -30,19 +31,29 @@ console.log(xmlhttp);
 
 			    		var sessionIDtemp = xmlhttp.responseText.substring(7,17);
 			    		sessionID = parseInt(sessionIDtemp);
+			    		console.log(sessionID);
 
 				        if (sessionID >= 1000000000 && sessionID <= 9999999999 ) { //if (xmlhttp.responseText >= 1000000000 && xmlhttp.responseText <= 9999999999 )
+
+				        	//Valid credentials
+				        	console.log("LOGIN_NOTIFICATION: Successfull");
+				        	document.getElementById("loginNotification").style.color = "090";
+				        	clearInputArea();	
+				        	document.getElementById("loginNotification").innerHTML = "Valid credentials";
 
 				        } else {
 
 				        	//Invalid response
 				        	console.log("LOGIN_ERROR: Invalid response from server");
+
 				        }
 
 				    } else if(response == "INVALID"){
 
 				    	//invalid credentials
 				    	console.log("LOGIN_NOTIFICATION: Invalid credentials");
+				    	document.getElementById("loginNotification").style.color = "c00";
+				    	document.getElementById("loginNotification").innerHTML = "Invalid credentials!";
 
 				    } else if (response == "ERROR.."){
 
@@ -53,12 +64,17 @@ console.log(xmlhttp);
 
 				    	//communication error with server
 				    	console.log("LOGIN_ERROR: Communication error with server");
+				    	document.body.innerHTML = xmlhttp.responseText;
 
 				    }
 
 			    } else {
 
-			    	console.log("LOGIN_ERROR: No response from server");
+			    	if(timeOut > 14){
+			    		console.log("LOGIN_ERROR: Slow or no response from server");
+			    	} else {
+			    		timeOut++;
+			    	}
 			    }
 
 			    /*xmlhttp.open("lue||GET", "ajaxlogin.php?sessionID=" + sessionID, true);
@@ -69,7 +85,8 @@ console.log(xmlhttp);
 			}
 
 		} else {
-
+			document.getElementById("loginNotification").style.color = "c00";
+			document.getElementById("loginNotification").innerHTML = "You must fill out both username and password";
 		}
 
 	}
