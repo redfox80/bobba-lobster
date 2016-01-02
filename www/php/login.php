@@ -1,49 +1,72 @@
 <?php
 	
-	$username = $_GET["username"];
-	$password = hash("sha512", $_GET["password"]);
+	@$username = $_GET["username"];
+	@$password = hash("sha512", $_GET["password"]);
 	$loginRES = null;
 
-	if ($username != "" && $password != ""){
-		require_once("dbconnect.php");
-
-		$query = "select * FROM USERS WHERE username = '$username' AND password = '$password' LIMIT 1";
-
-		$qRequest = mysqli_query($dbc, $query)
-		or die("Query error: " . mysqli_error());
-
-		$response = mysqli_fetch_array($qRequest);
-
-		if($response['username'] == $username && $response['password'] == $password){
-			$loginRES = "VALID";
-		} else if( $response['username'] != $username || $response['password'] != $password){
-			$loginRES = "INVALID";
-		} else {
-			$loginRES = "ERROR";
-		}
-		
+	if (session_status() == PHP_SESSION_NONE) {
+    	session_start();
 	}
 
-	if(isset($loginRES)){
-		if($loginRES === "VALID"){
+	if($_GET['operation'] == "login"){
 
-			$session_id = rand(1000000000, 9999999999);
-			 echo "VALID.." . $session_id;
+		if ($username != "" && $password != ""){
+			require_once("dbconnect.php");
 
-		}  else if($loginRES === "INVALID"){
+			$query = "select * FROM USERS WHERE username = '$username' AND password = '$password' LIMIT 1";
 
-			echo "INVALID";
+			$qRequest = mysqli_query($dbc, $query)
+			or die("Query error: " . mysqli_error());
 
-		} else if ($loginRES === "ERROR"){
+			$response = mysqli_fetch_array($qRequest);
 
-			echo "ERROR..";
+			if($response['username'] == $username && $response['password'] == $password){
+				$loginRES = "VALID";
+			} else if( $response['username'] != $username || $response['password'] != $password){
+				$loginRES = "INVALID";
+			} else {
+				$loginRES = "ERROR";
+			}
+			
+		}
 
-		} else {
+		if(isset($loginRES)){
+			if($loginRES === "VALID"){
 
-			echo "SERVER ERROR";
+				SESSION_REGENERATE_ID(true);
+				$session_id = rand(1000000000, 9999999999);
+				$_SESSION['loggedIn'] = true;
+				$_SESSION['permission'] = $response['permission'];
+				$_SESSION['userID'] = $response['id'];
+				mysqli_close($dbc);
+				echo "VALID.." . $session_id;
+
+			}  else if($loginRES === "INVALID"){
+
+				mysqli_close($dbc);
+				echo "INVALID";
+
+			} else if ($loginRES === "ERROR"){
+
+				mysqli_close($dbc);
+				echo "ERROR..";
+
+			} else {
+
+				mysqli_close($dbc);
+				echo "SERVER ERROR";
+
+			}
 
 		}
 
+	} else if($_GET['operation'] == "logout"){
+
+		unset($_SESSION['loggedIn'], $_SESSION['permission']);
+
+		session_destroy();
+		session_unset();
+		echo "done";
 	}
 
 ?>

@@ -5,7 +5,7 @@
 
 		<title>Project crunge</title>
 		<meta charset="utf-8"/>
-		<link type="text/css" rel="stylesheet" href="style.css"/>
+		<link type="text/css" rel="stylesheet" href="/style.css"/>
 	</head>
 
 	<body>
@@ -16,7 +16,7 @@
 
 		<div class="header">
 
-			<h1 id="title">Project crunge</h1>
+			<h1 id="title"><a href="/">Project crunge</a></h1>
 
 		</div>
 

@@ -1,11 +1,24 @@
 //loginscript
 
+var sessionID;
+
+	console.log(getCookie("sessionID"));
+
+document.addEventListener('keydown', function(event) {
+
+    if(event.keyCode == 13 && document.getElementById("login").style.display == "inherit") {
+
+        login();
+
+    }
+})
+
 if (window.XMLHttpRequest){
 	// code for IE7+, Firefox, Chrome, Opera, Safari
 	xmlhttp = new XMLHttpRequest();
 }else{
 	// code for IE6, IE5
-	xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+	console.log("ERROR: an error occured, or you are using an unsupported browser")
 }
 console.log(xmlhttp);
 
@@ -17,7 +30,7 @@ console.log(xmlhttp);
 			var passwordI = document.getElementById("password").value;
 			var sessionID;	
 
-			xmlhttp.open("GET", "/php/login.php?username="+usernameI+"&password="+passwordI , true);
+			xmlhttp.open("GET", "/php/login.php?operation=login&username="+usernameI+"&password="+passwordI , true);
 			xmlhttp.send();
 			var timeOut = 0;
 
@@ -38,8 +51,10 @@ console.log(xmlhttp);
 				        	//Valid credentials
 				        	console.log("LOGIN_NOTIFICATION: Successfull");
 				        	document.getElementById("loginNotification").style.color = "090";
+				        	setCookie("sessionID", sessionID, 2);
 				        	clearInputArea();	
 				        	document.getElementById("loginNotification").innerHTML = "Valid credentials";
+				        	window.location = "/main";
 
 				        } else {
 
@@ -90,3 +105,61 @@ console.log(xmlhttp);
 		}
 
 	}
+
+	function logout(){
+
+		xmlhttp.open("GET", "/php/login.php?operation=logout&sessionID="+getCookie(sessionID) , true);
+		xmlhttp.send();
+		var timeOut = 0;
+
+		xmlhttp.onreadystatechange = function () {
+
+			if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+
+	    		if(xmlhttp.responseText == "done"){
+	    			setCookie("sessionID", "null", undefined);
+	    			window.location = "/";
+		   		} else {
+		    		document.getElementById("main").innerHTML = xmlhttp.responseText;
+		   		}
+
+		   }
+
+		}
+
+	}
+
+	function checkSessionStatus() {
+		temp1 = parseInt(getCookie("sessionID"));
+
+		if (temp1 >= 1000000000 && temp1 <= 9999999999){
+			window.location = "/main";
+		} else {}
+	}
+
+
+function setCookie(cname, cvalue, exdays) {
+
+    var d = new Date();
+    d.setTime(d.getTime() + (exdays*24*60*60*1000));
+    var expires = "expires="+d.toUTCString();
+    document.cookie = cname + "=" + cvalue + "; " + expires + "; path=/";
+
+}
+
+function getCookie(cname) {
+
+    var name = cname + "=";
+    var ca = document.cookie.split(';');
+    
+    for(var i=0; i<ca.length; i++) {
+
+        var c = ca[i];
+
+        while (c.charAt(0)==' ') c = c.substring(1);
+
+        if (c.indexOf(name) == 0) return c.substring(name.length,c.length);
+    }
+
+    return "";
+}

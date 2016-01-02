@@ -12,6 +12,7 @@ function displayPrimary(element) {
 
 	if(elementArray[element] == "login"){
 		clearInputArea();
+		checkSessionStatus();
 	}
 }
 
