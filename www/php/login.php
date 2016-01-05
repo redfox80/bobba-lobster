@@ -13,7 +13,7 @@
 		if ($username != "" && $password != ""){
 			require_once("dbconnect.php");
 
-			$query = "select * FROM USERS WHERE username = '$username' AND password = '$password' LIMIT 1";
+			$query = "SELECT * FROM users WHERE username = '$username' AND password = '$password' LIMIT 1";
 
 			$qRequest = mysqli_query($dbc, $query)
 			or die("Query error: " . mysqli_error());

@@ -79,7 +79,8 @@ console.log(xmlhttp);
 
 				    	//communication error with server
 				    	console.log("LOGIN_ERROR: Communication error with server");
-				    	document.body.innerHTML = xmlhttp.responseText;
+				    	document.getElementById("loginNotification").style.color = "red";
+				    	document.getElementById("loginNotification").innerHTML = xmlhttp.responseText;
 
 				    }
 
