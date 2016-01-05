@@ -11,7 +11,7 @@ document.addEventListener('keydown', function(event) {
         login();
 
     }
-})
+});
 
 if (window.XMLHttpRequest){
 	// code for IE7+, Firefox, Chrome, Opera, Safari
@@ -51,7 +51,7 @@ console.log(xmlhttp);
 				        	//Valid credentials
 				        	console.log("LOGIN_NOTIFICATION: Successfull");
 				        	document.getElementById("loginNotification").style.color = "090";
-				        	setCookie("sessionID", sessionID, 2);
+				        	setCookie("sessionID", sessionID, 0);
 				        	clearInputArea();	
 				        	document.getElementById("loginNotification").innerHTML = "Valid credentials";
 				        	window.location = "/main";
@@ -91,11 +91,6 @@ console.log(xmlhttp);
 			    		timeOut++;
 			    	}
 			    }
-
-			    /*xmlhttp.open("lue||GET", "ajaxlogin.php?sessionID=" + sessionID, true);
-			    xmlhttp.send();*/
-
-			    //setCookie("sessionID", sessionID, undefined);
 
 			}
 

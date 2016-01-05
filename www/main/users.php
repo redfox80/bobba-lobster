@@ -4,7 +4,7 @@ if (session_status() == PHP_SESSION_NONE) {
     	session_start();
 }
 
-$permissionRequired = 1;
+$permissionRequired = 3;
 
 if(@$_SESSION['loggedIn'] == true && $_SESSION['permission'] >= $permissionRequired){
 
@@ -60,7 +60,34 @@ echo'
 
 			<div class="normalElement" id="main">
 
-				Main
+				<table id="users" border="1px solid black" style="margin-left:40px; background-color: white; padding: 8px; text-align: center;">
+
+				<tr>
+
+					<td style="min-width: 150px;">username</td>
+					<td style="min-width: 60px;">ID</td>
+					<td style="min-width: 230px;">email</td>
+					<td style="min-width: 60px;">Permission</td>
+					<td style="min-width: 70px;">reset password</td>
+					<td style="min-width: 70px;">remove</td>
+
+				</tr>';
+
+				$query = "SELECT * FROM users";
+
+				$qRequest = mysqli_query($dbc, $query)
+				or die("Query error: " . mysqli_error());
+
+				while($response = mysqli_fetch_array($qRequest)){
+					echo'<tr><td>' . $response['username'] . '</td>
+					<td>' . $response['id'] . '</td>
+					<td>' . $response['email'] . '</td>
+					<td>'; if($response['permission'] == 3){echo"admin";}elseif($response['permission'] == 2){echo"mod";}elseif($response['permission'] == 1){echo"normal";} echo'</td></tr>';
+				}
+
+				echo'</tr>
+
+				</table>
 
 			</div>
 
