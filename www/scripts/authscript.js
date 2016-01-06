@@ -75,6 +75,11 @@ console.log(xmlhttp);
 				    	//server error
 				    	console.log("LOGIN_ERROR: Server error");
 
+				    } else if(response == "DISA..."){
+
+				    	console.log("LOGIN_NOTIFICATION: Account is disabled");
+				    	document.getElementById("loginNotification").style.color = "red";
+				    	document.getElementById("loginNotification").innerHTML = "Account is disabled!<br><br>Contact staff for more information";
 				    } else {
 
 				    	//communication error with server
@@ -114,6 +119,7 @@ console.log(xmlhttp);
 
 	    		if(xmlhttp.responseText == "done"){
 	    			setCookie("sessionID", "null", undefined);
+	    			setCookie("PHPSESSID", "", undefined);
 	    			window.location = "/";
 		   		} else {
 		    		document.getElementById("main").innerHTML = xmlhttp.responseText;
@@ -126,9 +132,9 @@ console.log(xmlhttp);
 	}
 
 	function checkSessionStatus() {
-		temp1 = parseInt(getCookie("sessionID"));
+		temp1 = getCookie("PHPSESSID");
 
-		if (temp1 >= 1000000000 && temp1 <= 9999999999){
+		if (temp1 != ""){
 			window.location = "/main";
 		} else {}
 	}

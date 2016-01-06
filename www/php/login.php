@@ -20,8 +20,10 @@
 
 			$response = mysqli_fetch_array($qRequest);
 
-			if($response['username'] == $username && $response['password'] == $password){
+			if($response['username'] == $username && $response['password'] == $password && $response['enaOrDisa'] == 1){
 				$loginRES = "VALID";
+			} else if($response['username'] == $username && $response['password'] == $password && $response['enaOrDisa'] == 0){
+				$loginRES = "DISA";
 			} else if( $response['username'] != $username || $response['password'] != $password){
 				$loginRES = "INVALID";
 			} else {
@@ -46,6 +48,9 @@
 				mysqli_close($dbc);
 				echo "INVALID";
 
+			} else if($loginRES ==="DISA"){
+				mysqli_close($dbc);
+				echo "DISA...";
 			} else if ($loginRES === "ERROR"){
 
 				mysqli_close($dbc);
