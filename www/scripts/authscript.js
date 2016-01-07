@@ -51,10 +51,18 @@ console.log(xmlhttp);
 				        	//Valid credentials
 				        	console.log("LOGIN_NOTIFICATION: Successfull");
 				        	document.getElementById("loginNotification").style.color = "090";
-				        	setCookie("sessionID", sessionID, 0);
+				        	setCookie("sessionID", sessionID, undefined);
+				        	setCookie("loggedIn", "true", undefined);
 				        	clearInputArea();	
 				        	document.getElementById("loginNotification").innerHTML = "Valid credentials";
-				        	window.location = "/main";
+				        	if(!getCookie("loggedIn")){
+				        		console.log("ERROR: LoginIn cookie not set");
+				        		setTimeout( function(){
+				        			window.location = "/main";
+				        		}, 3000);
+				        	} else {
+				        		window.location = "/main";
+				        	}
 
 				        } else {
 
@@ -119,7 +127,8 @@ console.log(xmlhttp);
 
 	    		if(xmlhttp.responseText == "done"){
 	    			setCookie("sessionID", "null", undefined);
-	    			setCookie("PHPSESSID", "", undefined);
+	    			setCookie("loggedIn", false, -1);
+	    			document.cookie = "PHPSESSID" + '=; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
 	    			window.location = "/";
 		   		} else {
 		    		document.getElementById("main").innerHTML = xmlhttp.responseText;
@@ -134,7 +143,7 @@ console.log(xmlhttp);
 	function checkSessionStatus() {
 		temp1 = getCookie("PHPSESSID");
 
-		if (temp1 != ""){
+		if (temp1 != "" && getCookie("loggedIn") == "true"){
 			window.location = "/main";
 		} else {}
 	}

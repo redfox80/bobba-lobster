@@ -71,6 +71,9 @@
 
 		session_destroy();
 		session_unset();
+		if(isset($_COOKIE['PHPSESSID'])){
+			unset($_COOKIE['PHPSESSID']);
+		}
 		echo "done";
 	}
 
