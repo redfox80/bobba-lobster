@@ -6,7 +6,7 @@ if (session_status() == PHP_SESSION_NONE) {
 
 $permissionRequired = 1;
 
-if(@$_SESSION['loggedIn'] == true && $_SESSION['permission'] >= $permissionRequired){
+if(/*$_SESSION['loggedIn'] == true &&*/ $_SESSION['permission'] >= $permissionRequired){
 
 	echo 
 '<DOCTYPE html>

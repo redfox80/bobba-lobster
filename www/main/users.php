@@ -87,7 +87,7 @@ echo'
 					<td>' . $response['email'] . '</td>
 					<td>'; if($response['permission'] == 3){echo"admin";}elseif($response['permission'] == 2){echo"mod";}elseif($response['permission'] == 1){echo"normal";} echo'</td>
 					<td><form action="usersM.php" method="post"><input hidden value="resetPW"><input hidden value="' . $response['id'] . '"><button type="submit" style="margin-top: 6px; background-color: white;">reset pw</button></form></td>
-					<td>'; if($response['enaOrDisa'] == 1){ echo' <div style="width: 20px; height: 10px border-radius: 10px; background-color: green;"';} else{echo' <div style="width: 20px; height: 10px border-radius: 10px; background-color: red;"';}
+					<td>'; if($response['enaOrDisa'] == 1){ echo' <div style="width: 20px; height: 10px border-radius: 10px; background-color: green;>"</div>';} else{echo' <div style="width: 20px; height: 10px border-radius: 10px; background-color: red;"></div>';}
 					echo '<form action="usersM.php" method="post"><input hidden value="EnaOrDisa"><input hidden value="' . $response['id'] . '"><button type="submit" style="margin-top: 6px; background-color: white;">Enable or disable</button></form></td>
 				</tr>';
 				}
