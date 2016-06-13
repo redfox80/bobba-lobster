@@ -12,9 +12,9 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
-});
+    return view('login');
+})->name('login');
 
-Route::get('/main', function(){
-	return view('main');
-});
+Route::get('/home', function () {
+    return view('home');
+})->name('home');

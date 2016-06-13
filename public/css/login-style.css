@@ -1,0 +1,40 @@
+body {
+  margin: 0px !important;
+  padding: 0px !important;
+  background-color: #21AFDE; }
+
+.login-content {
+  position: absolute;
+  width: 300px;
+  height: 200px;
+  top: 25%;
+  left: 50%;
+  margin-left: -150px;
+  border: 1px solid #000;
+  border-radius: 20px;
+  background-color: #fff;
+  text-align: center; }
+
+.login-content-text {
+  position: absolute;
+  width: 300px;
+  height: 200px;
+  top: 10%;
+  left: 50%;
+  margin-left: -150px; }
+
+.login-content-text .input {
+  width: 200px; }
+
+.login-content-buttons {
+  position: relative;
+  width: 200px;
+  left: 50%;
+  margin-left: -100px; }
+
+.login-content-buttons button {
+  margin: 0px;
+  padding: 0px;
+  height: 30px; }
+
+/*# sourceMappingURL=login-style.css.map */
