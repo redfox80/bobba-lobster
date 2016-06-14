@@ -15,6 +15,26 @@ Route::get('/', function () {
     return view('login');
 })->name('login');
 
-Route::get('/home', function () {
-    return view('home');
-})->name('home');
+
+Route::group(['prefix' => 'home'], function(){
+
+	Route::get('/about', function(){
+		return view('about');
+	});
+
+	Route::get('', function(){
+		return view('home');
+	});
+});
+
+
+Route::group(['prefix' => 'test'], function() {
+
+	Route::get('test', function(){
+		return view('login');
+	});
+
+	Route::get('', function(){
+		return view('welcome');
+	});
+});
